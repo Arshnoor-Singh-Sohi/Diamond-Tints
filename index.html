@@ -3,45 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Diamond Tints - Professional Car Window Tinting</title>
+    <title>Diamond Tints - Elite Window Tinting Experience</title>
     <style>
-        /* CSS Reset and Base Styles */
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600;700&display=swap');
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        /* CSS Variables for easy customization */
         :root {
-            --primary-color: #1a1a1a;
-            --accent-color: #00bcd4;
-            --text-light: #ffffff;
-            --text-dark: #333333;
-            --bg-section: #f5f5f5;
-            --transition: all 0.3s ease;
+            --primary: #0a0a0a;
+            --accent: #00d4ff;
+            --accent-glow: #00a8cc;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text: #ffffff;
+            --text-dim: rgba(255, 255, 255, 0.8);
+            --shadow: rgba(0, 212, 255, 0.5);
+            --dark-gradient: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
         }
 
         body {
-            font-family: 'Arial', sans-serif;
-            line-height: 1.6;
-            color: var(--text-dark);
-            scroll-behavior: smooth;
+            font-family: 'Inter', sans-serif;
+            background: var(--primary);
+            color: var(--text);
+            overflow-x: hidden;
+            position: relative;
         }
 
-        /* Navigation Styles */
-        nav {
-            background: var(--primary-color);
-            padding: 1rem 0;
+        /* Animated Background Particles */
+        #particles-canvas {
             position: fixed;
-            width: 100%;
             top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* Glassmorphic Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1rem 0;
+            background: rgba(10, 10, 10, 0.3);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
             z-index: 1000;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(10, 10, 10, 0.9);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.1);
         }
 
         .nav-container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 0 2rem;
             display: flex;
@@ -50,352 +73,786 @@
         }
 
         .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: var(--accent-color);
+            font-family: 'Orbitron', monospace;
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--accent);
             text-decoration: none;
-            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            position: relative;
+            text-shadow: 0 0 30px var(--accent-glow);
+            transition: all 0.3s ease;
+        }
+
+        .logo::before {
+            content: '◆';
+            font-size: 1.5rem;
+            animation: rotateDiamond 4s linear infinite;
+        }
+
+        @keyframes rotateDiamond {
+            to { transform: rotate(360deg); }
         }
 
         .logo:hover {
-            color: var(--text-light);
+            transform: scale(1.05);
+            text-shadow: 0 0 50px var(--accent-glow);
         }
 
         .nav-links {
             display: flex;
             list-style: none;
-            gap: 2rem;
+            gap: 3rem;
         }
 
         .nav-links a {
-            color: var(--text-light);
+            color: var(--text-dim);
             text-decoration: none;
-            transition: var(--transition);
             font-weight: 500;
+            position: relative;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            transition: width 0.3s ease;
         }
 
         .nav-links a:hover {
-            color: var(--accent-color);
+            color: var(--accent);
+            text-shadow: 0 0 20px var(--accent-glow);
         }
 
-        /* Mobile Menu Button */
-        .mobile-menu {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
+        .nav-links a:hover::after {
+            width: 100%;
         }
 
-        .mobile-menu span {
-            width: 25px;
-            height: 3px;
-            background: var(--text-light);
-            margin: 3px 0;
-            transition: var(--transition);
-        }
-
-        /* Hero Section */
+        /* Hero Section with Dynamic Effects */
         .hero {
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23333" width="1200" height="600"/><path fill="%23444" d="M0 300L50 325L100 300L150 275L200 300L250 325L300 300L350 275L400 300L450 325L500 300L550 275L600 300L650 325L700 300L750 275L800 300L850 325L900 300L950 275L1000 300L1050 325L1100 300L1150 275L1200 300V600H0V300Z"/></svg>');
-            background-size: cover;
-            background-position: center;
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
+            position: relative;
+            background: radial-gradient(ellipse at center, rgba(0, 212, 255, 0.1) 0%, transparent 70%);
+            z-index: 2;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                repeating-linear-gradient(
+                    90deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(0, 212, 255, 0.03) 2px,
+                    rgba(0, 212, 255, 0.03) 4px
+                ),
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(0, 212, 255, 0.03) 2px,
+                    rgba(0, 212, 255, 0.03) 4px
+                );
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            to { transform: translate(4px, 4px); }
+        }
+
+        .hero-content {
             text-align: center;
-            color: var(--text-light);
-            margin-top: 60px;
+            position: relative;
+            z-index: 3;
+            max-width: 1000px;
+            padding: 0 2rem;
         }
 
-        .hero-content h1 {
-            font-size: 3.5rem;
+        .hero-title {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 900;
             margin-bottom: 1rem;
-            animation: fadeInUp 1s ease;
+            background: linear-gradient(135deg, #ffffff 0%, var(--accent) 50%, #ffffff 100%);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientShift 4s ease infinite;
+            filter: drop-shadow(0 0 30px rgba(0, 212, 255, 0.5));
         }
 
-        .hero-content p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-            animation: fadeInUp 1s ease 0.2s;
-            animation-fill-mode: both;
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
         }
 
-        .cta-button {
-            display: inline-block;
-            padding: 1rem 2.5rem;
-            background: var(--accent-color);
-            color: var(--text-light);
-            text-decoration: none;
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--text-dim);
+            margin-bottom: 3rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.5s forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+        }
+
+        .cta-container {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-primary {
+            padding: 1.2rem 3rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-glow) 100%);
+            color: var(--primary);
+            border: none;
             border-radius: 50px;
-            transition: var(--transition);
-            font-weight: bold;
-            animation: fadeInUp 1s ease 0.4s;
-            animation-fill-mode: both;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
         }
 
-        .cta-button:hover {
-            background: #00acc1;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,188,212,0.3);
+        .cta-primary::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
         }
 
-        /* Services Section */
-        .services {
-            padding: 5rem 0;
-            background: var(--bg-section);
+        .cta-primary:hover::before {
+            width: 300px;
+            height: 300px;
         }
 
-        .container {
-            max-width: 1200px;
+        .cta-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 40px rgba(0, 212, 255, 0.7);
+        }
+
+        .cta-secondary {
+            padding: 1.2rem 3rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            background: transparent;
+            color: var(--accent);
+            border: 2px solid var(--accent);
+            border-radius: 50px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-secondary:hover {
+            color: var(--primary);
+            background: var(--accent);
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
+            transform: translateY(-3px);
+        }
+
+        /* Interactive Tint Showcase */
+        .tint-showcase {
+            padding: 6rem 0;
+            position: relative;
+            z-index: 2;
+            background: linear-gradient(180deg, transparent 0%, rgba(0, 212, 255, 0.05) 50%, transparent 100%);
+        }
+
+        .showcase-container {
+            max-width: 1400px;
             margin: 0 auto;
             padding: 0 2rem;
         }
 
-        .section-title {
+        .section-header {
             text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            color: var(--primary-color);
+            margin-bottom: 4rem;
         }
 
-        .services-grid {
+        .section-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, var(--text) 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-dim);
+        }
+
+        /* Before/After Slider */
+        .comparison-slider {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto 4rem;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .comparison-slider img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .slider-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .slider-overlay img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 200%;
+            max-width: none;
+        }
+
+        .slider-handle {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 4px;
+            height: 100%;
+            background: var(--accent);
+            cursor: ew-resize;
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        .slider-handle::before,
+        .slider-handle::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            height: 40px;
+            background: var(--accent);
+            border-radius: 50%;
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        .slider-handle::after {
+            width: 20px;
+            height: 20px;
+            background: var(--primary);
+        }
+
+        .slider-labels {
+            position: absolute;
+            top: 20px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            pointer-events: none;
+        }
+
+        .slider-label {
+            background: rgba(0, 0, 0, 0.8);
+            color: var(--text);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Tint Options Grid */
+        .tint-options {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
+            margin-top: 4rem;
         }
 
-        .service-card {
-            background: white;
+        .tint-card {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
             padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: var(--transition);
-            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
         }
 
-        .service-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        .tint-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
         }
 
-        .service-icon {
+        .tint-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent);
+            box-shadow: 0 20px 40px rgba(0, 212, 255, 0.3);
+        }
+
+        .tint-card:hover::before {
+            opacity: 0.1;
+        }
+
+        .tint-percentage {
+            font-family: 'Orbitron', monospace;
             font-size: 3rem;
-            margin-bottom: 1rem;
+            font-weight: 900;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 20px var(--accent-glow);
         }
 
-        .service-card h3 {
+        .tint-name {
             font-size: 1.5rem;
+            font-weight: 700;
             margin-bottom: 1rem;
-            color: var(--primary-color);
         }
 
-        /* About Section */
-        .about {
-            padding: 5rem 0;
-            background: white;
-        }
-
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        .about-text h2 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            color: var(--primary-color);
-        }
-
-        .about-features {
+        .tint-features {
             list-style: none;
-            margin-top: 1.5rem;
+            margin-top: 1rem;
         }
 
-        .about-features li {
+        .tint-features li {
             padding: 0.5rem 0;
-            display: flex;
-            align-items: center;
-        }
-
-        .about-features li:before {
-            content: "✓";
-            color: var(--accent-color);
-            font-weight: bold;
-            margin-right: 0.5rem;
-            font-size: 1.2rem;
-        }
-
-        .about-image {
-            background: linear-gradient(45deg, var(--accent-color), var(--primary-color));
-            padding: 2rem;
-            border-radius: 10px;
-            text-align: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 300px;
-        }
-
-        .about-image-text {
-            color: white;
-            font-size: 2rem;
-            font-weight: bold;
-        }
-
-        /* Contact Section */
-        .contact {
-            padding: 5rem 0;
-            background: var(--primary-color);
-            color: var(--text-light);
-        }
-
-        .contact-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 3rem;
-        }
-
-        .contact-info h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--accent-color);
-        }
-
-        .contact-item {
-            margin: 1rem 0;
+            color: var(--text-dim);
             display: flex;
             align-items: center;
             gap: 0.5rem;
         }
 
+        .tint-features li::before {
+            content: '✓';
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        /* Services Section with 3D Cards */
+        .services {
+            padding: 6rem 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .service-card {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 3rem;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, transparent 0%, rgba(0, 212, 255, 0.1) 100%);
+            border-radius: 20px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px) rotateX(-5deg);
+            border-color: var(--accent);
+            box-shadow: 0 30px 60px rgba(0, 212, 255, 0.3);
+        }
+
+        .service-card:hover::before {
+            opacity: 1;
+        }
+
+        .service-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .service-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .service-description {
+            color: var(--text-dim);
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .service-link {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .service-link:hover {
+            gap: 1rem;
+            text-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        /* Stats Counter Section */
+        .stats {
+            padding: 4rem 0;
+            background: linear-gradient(90deg, rgba(0, 212, 255, 0.1) 0%, transparent 50%, rgba(0, 212, 255, 0.1) 100%);
+            position: relative;
+            z-index: 2;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: 'Orbitron', monospace;
+            font-size: 4rem;
+            font-weight: 900;
+            color: var(--accent);
+            text-shadow: 0 0 30px var(--accent-glow);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.2rem;
+            color: var(--text-dim);
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 6rem 0;
+            position: relative;
+            z-index: 2;
+            background: radial-gradient(ellipse at bottom, rgba(0, 212, 255, 0.1) 0%, transparent 70%);
+        }
+
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
         .contact-form {
-            background: rgba(255,255,255,0.1);
-            padding: 2rem;
-            border-radius: 10px;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 3rem;
+            backdrop-filter: blur(10px);
         }
 
         .form-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.8rem;
+            color: var(--text-dim);
+            font-weight: 500;
         }
 
-        .form-group input,
-        .form-group textarea {
+        .form-control {
             width: 100%;
-            padding: 0.8rem;
-            border: none;
-            border-radius: 5px;
-            background: rgba(255,255,255,0.9);
-            color: var(--text-dark);
+            padding: 1.2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: 10px;
+            color: var(--text);
+            font-size: 1rem;
+            transition: all 0.3s ease;
         }
 
-        .form-group textarea {
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        textarea.form-control {
             resize: vertical;
-            min-height: 100px;
+            min-height: 120px;
         }
 
         .submit-btn {
-            background: var(--accent-color);
-            color: white;
-            padding: 0.8rem 2rem;
+            width: 100%;
+            padding: 1.5rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-glow) 100%);
+            color: var(--primary);
             border: none;
-            border-radius: 5px;
+            border-radius: 10px;
             cursor: pointer;
-            transition: var(--transition);
-            font-weight: bold;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
 
         .submit-btn:hover {
-            background: #00acc1;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.5);
+        }
+
+        .contact-info {
+            padding: 2rem;
+        }
+
+        .contact-info h3 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: var(--accent);
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            color: var(--text-dim);
+        }
+
+        .info-icon {
+            font-size: 1.5rem;
+            color: var(--accent);
         }
 
         /* Footer */
         footer {
-            background: #0a0a0a;
-            color: var(--text-light);
+            background: rgba(0, 0, 0, 0.8);
+            padding: 3rem 0;
             text-align: center;
-            padding: 2rem 0;
+            border-top: 1px solid var(--glass-border);
+            position: relative;
+            z-index: 2;
         }
 
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        /* Mobile Menu */
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 4px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .mobile-menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--accent);
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        .mobile-menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .mobile-menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
         }
 
         /* Responsive Design */
         @media (max-width: 768px) {
             .nav-links {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
+                position: fixed;
+                top: 0;
+                right: -100%;
                 width: 100%;
-                background: var(--primary-color);
+                height: 100vh;
+                background: rgba(10, 10, 10, 0.98);
+                backdrop-filter: blur(20px);
                 flex-direction: column;
-                padding: 1rem 0;
+                justify-content: center;
+                align-items: center;
+                transition: right 0.3s ease;
             }
 
             .nav-links.active {
+                right: 0;
+            }
+
+            .mobile-menu-toggle {
                 display: flex;
             }
 
-            .mobile-menu {
-                display: flex;
+            .hero-title {
+                font-size: 3rem;
             }
 
-            .hero-content h1 {
-                font-size: 2.5rem;
+            .contact-container {
+                grid-template-columns: 1fr;
             }
 
-            .hero-content p {
-                font-size: 1.1rem;
-            }
-
-            .about-content {
+            .tint-options {
                 grid-template-columns: 1fr;
             }
 
             .services-grid {
                 grid-template-columns: 1fr;
             }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
-        @media (max-width: 480px) {
-            .hero-content h1 {
-                font-size: 2rem;
-            }
+        /* Loading Animation */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
 
-            .section-title {
-                font-size: 2rem;
+        .loader.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader-diamond {
+            width: 60px;
+            height: 60px;
+            border: 3px solid var(--accent);
+            transform: rotate(45deg);
+            animation: diamondPulse 1.5s ease infinite;
+        }
+
+        @keyframes diamondPulse {
+            0%, 100% {
+                transform: rotate(45deg) scale(1);
+                box-shadow: 0 0 20px var(--accent-glow);
+            }
+            50% {
+                transform: rotate(45deg) scale(1.2);
+                box-shadow: 0 0 40px var(--accent-glow);
             }
         }
     </style>
 </head>
 <body>
+    <!-- Loading Screen -->
+    <div class="loader" id="loader">
+        <div class="loader-diamond"></div>
+    </div>
+
+    <!-- Particle Background -->
+    <canvas id="particles-canvas"></canvas>
+
     <!-- Navigation -->
-    <nav>
+    <nav id="navbar">
         <div class="nav-container">
-            <a href="#home" class="logo">💎 Diamond Tints</a>
+            <a href="#home" class="logo">DIAMOND TINTS</a>
             <ul class="nav-links" id="navLinks">
                 <li><a href="#home">Home</a></li>
+                <li><a href="#showcase">Showcase</a></li>
                 <li><a href="#services">Services</a></li>
-                <li><a href="#about">About</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
-            <div class="mobile-menu" id="mobileMenu">
+            <div class="mobile-menu-toggle" id="mobileMenu">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -406,103 +863,195 @@
     <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="hero-content">
-            <h1>Premium Car Window Tinting</h1>
-            <p>Enhance your ride with professional window tinting services</p>
-            <a href="#contact" class="cta-button">Get Free Quote</a>
+            <h1 class="hero-title">PRECISION TINTING</h1>
+            <p class="hero-subtitle">Experience the perfect blend of style, privacy, and protection</p>
+            <div class="cta-container">
+                <a href="#contact" class="cta-primary">Get Instant Quote</a>
+                <a href="#showcase" class="cta-secondary">View Showcase</a>
+            </div>
         </div>
     </section>
 
-    <!-- Services Section -->
-    <section class="services" id="services">
-        <div class="container">
-            <h2 class="section-title">Our Services</h2>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon">🚗</div>
-                    <h3>Automotive Tinting</h3>
-                    <p>Professional window tinting for all vehicle types with premium films that block UV rays and reduce heat.</p>
+    <!-- Interactive Tint Showcase -->
+    <section class="tint-showcase" id="showcase">
+        <div class="showcase-container">
+            <div class="section-header">
+                <h2 class="section-title">SEE THE DIFFERENCE</h2>
+                <p class="section-subtitle">Drag the slider to experience our premium tinting</p>
+            </div>
+
+            <!-- Before/After Slider -->
+            <div class="comparison-slider" id="comparisonSlider">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Crect fill='%23666' width='800' height='600'/%3E%3Ctext x='400' y='300' text-anchor='middle' fill='%23999' font-size='40' font-family='Arial'%3EAfter Tinting%3C/text%3E%3C/svg%3E" alt="After">
+                <div class="slider-overlay" id="sliderOverlay">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Crect fill='%23ccc' width='800' height='600'/%3E%3Ctext x='400' y='300' text-anchor='middle' fill='%23666' font-size='40' font-family='Arial'%3EBefore Tinting%3C/text%3E%3C/svg%3E" alt="Before">
                 </div>
-                <div class="service-card">
-                    <div class="service-icon">🛡️</div>
-                    <h3>Security Film</h3>
-                    <p>Protect your vehicle with shatter-resistant security films that add an extra layer of safety.</p>
+                <div class="slider-handle" id="sliderHandle"></div>
+                <div class="slider-labels">
+                    <span class="slider-label">BEFORE</span>
+                    <span class="slider-label">AFTER</span>
                 </div>
-                <div class="service-card">
-                    <div class="service-icon">✨</div>
-                    <h3>Premium Ceramic Tint</h3>
-                    <p>Top-of-the-line ceramic window films offering maximum heat rejection without signal interference.</p>
+            </div>
+
+            <!-- Tint Options -->
+            <div class="tint-options">
+                <div class="tint-card" data-tint="70">
+                    <div class="tint-percentage">70%</div>
+                    <div class="tint-name">Crystal Clear</div>
+                    <p>Maximum visibility with UV protection</p>
+                    <ul class="tint-features">
+                        <li>99% UV Protection</li>
+                        <li>Minimal darkness</li>
+                        <li>Heat reduction</li>
+                    </ul>
+                </div>
+                <div class="tint-card" data-tint="35">
+                    <div class="tint-percentage">35%</div>
+                    <div class="tint-name">Executive</div>
+                    <p>Perfect balance of style and function</p>
+                    <ul class="tint-features">
+                        <li>Enhanced privacy</li>
+                        <li>Significant heat reduction</li>
+                        <li>Glare elimination</li>
+                    </ul>
+                </div>
+                <div class="tint-card" data-tint="5">
+                    <div class="tint-percentage">5%</div>
+                    <div class="tint-name">Stealth Mode</div>
+                    <p>Maximum privacy and protection</p>
+                    <ul class="tint-features">
+                        <li>Complete privacy</li>
+                        <li>Maximum heat rejection</li>
+                        <li>Ultimate UV protection</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section class="about" id="about">
-        <div class="container">
-            <div class="about-content">
-                <div class="about-text">
-                    <h2>Why Choose Diamond Tints?</h2>
-                    <p>With years of experience in the automotive tinting industry, we pride ourselves on delivering exceptional quality and customer satisfaction. Our certified technicians use only the finest materials and latest techniques.</p>
-                    <ul class="about-features">
-                        <li>Lifetime warranty on all installations</li>
-                        <li>Computer-cut precision for perfect fit</li>
-                        <li>Heat reduction up to 99%</li>
-                        <li>UV protection to preserve interior</li>
-                        <li>Enhanced privacy and security</li>
-                    </ul>
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="showcase-container">
+            <div class="section-header">
+                <h2 class="section-title">ELITE SERVICES</h2>
+                <p class="section-subtitle">Professional solutions for every vehicle</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🏎️</div>
+                    <h3 class="service-title">Automotive Excellence</h3>
+                    <p class="service-description">Premium window films engineered for superior heat rejection, UV protection, and optical clarity. Transform your driving experience.</p>
+                    <a href="#contact" class="service-link">Learn More →</a>
                 </div>
-                <div class="about-image">
-                    <div class="about-image-text">15+ Years of Excellence</div>
+                <div class="service-card">
+                    <div class="service-icon">🛡️</div>
+                    <h3 class="service-title">Security Films</h3>
+                    <p class="service-description">Military-grade protection against break-ins, accidents, and natural disasters. Keep your valuables and loved ones safe.</p>
+                    <a href="#contact" class="service-link">Explore Options →</a>
                 </div>
+                <div class="service-card">
+                    <div class="service-icon">💎</div>
+                    <h3 class="service-title">Ceramic Technology</h3>
+                    <p class="service-description">Next-generation nano-ceramic films offering unmatched heat rejection without signal interference. The pinnacle of tinting technology.</p>
+                    <a href="#contact" class="service-link">Discover More →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-number" data-count="15000">0</div>
+                <div class="stat-label">Vehicles Transformed</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" data-count="99">0</div>
+                <div class="stat-label">% UV Protection</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" data-count="85">0</div>
+                <div class="stat-label">% Heat Rejection</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" data-count="100">0</div>
+                <div class="stat-label">% Satisfaction</div>
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
     <section class="contact" id="contact">
-        <div class="container">
-            <h2 class="section-title" style="color: white;">Get In Touch</h2>
-            <div class="contact-content">
-                <div class="contact-info">
-                    <h3>Contact Information</h3>
-                    <div class="contact-item">
-                        <span>📍</span>
-                        <span>123 Main Street, Your City, Province</span>
+        <div class="contact-container">
+            <div class="contact-form-wrapper">
+                <div class="section-header" style="text-align: left;">
+                    <h2 class="section-title">GET YOUR QUOTE</h2>
+                    <p class="section-subtitle">Transform your ride today</p>
+                </div>
+                <form class="contact-form" id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" class="form-control" required>
                     </div>
-                    <div class="contact-item">
-                        <span>📞</span>
-                        <span>(555) 123-4567</span>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" class="form-control" required>
                     </div>
-                    <div class="contact-item">
-                        <span>✉️</span>
-                        <span>info@diamondtints.ca</span>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" class="form-control" required>
                     </div>
-                    <div class="contact-item">
-                        <span>🕒</span>
-                        <span>Mon-Sat: 9AM-6PM</span>
+                    <div class="form-group">
+                        <label for="vehicle">Vehicle Details</label>
+                        <input type="text" id="vehicle" class="form-control" placeholder="Year, Make, Model" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="service">Service Interest</label>
+                        <select id="service" class="form-control" required>
+                            <option value="">Select a service</option>
+                            <option value="automotive">Automotive Tinting</option>
+                            <option value="security">Security Film</option>
+                            <option value="ceramic">Ceramic Tinting</option>
+                            <option value="custom">Custom Solution</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Additional Information</label>
+                        <textarea id="message" class="form-control" placeholder="Tell us about your project"></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Get Instant Quote</button>
+                </form>
+            </div>
+            <div class="contact-info">
+                <h3>Visit Our Studio</h3>
+                <div class="info-item">
+                    <span class="info-icon">📍</span>
+                    <div>
+                        <p>123 Innovation Drive</p>
+                        <p>Windsor, ON N9B 3P4</p>
                     </div>
                 </div>
-                <div class="contact-form">
-                    <h3>Request a Quote</h3>
-                    <form id="contactForm">
-                        <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" id="name" name="name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="email" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="phone">Phone</label>
-                            <input type="tel" id="phone" name="phone">
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Vehicle Details & Message</label>
-                            <textarea id="message" name="message" required></textarea>
-                        </div>
-                        <button type="submit" class="submit-btn">Send Message</button>
-                    </form>
+                <div class="info-item">
+                    <span class="info-icon">📞</span>
+                    <div>
+                        <p>(519) 555-TINT</p>
+                        <p>24/7 Emergency Service</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <span class="info-icon">✉️</span>
+                    <div>
+                        <p>elite@diamondtints.ca</p>
+                        <p>Response within 1 hour</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <span class="info-icon">🕒</span>
+                    <div>
+                        <p>Mon-Fri: 8AM - 7PM</p>
+                        <p>Sat-Sun: 9AM - 5PM</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -510,26 +1059,196 @@
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2024 Diamond Tints. All rights reserved. | Powered by diamondtints.ca</p>
+        <p>&copy; 2024 Diamond Tints. Precision. Protection. Perfection.</p>
     </footer>
 
     <script>
-        // Mobile menu toggle functionality
+        // Particle Background Animation
+        const canvas = document.getElementById('particles-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2;
+                this.speedX = Math.random() * 0.5 - 0.25;
+                this.speedY = Math.random() * 0.5 - 0.25;
+                this.opacity = Math.random() * 0.5 + 0.2;
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                if (this.x > canvas.width) this.x = 0;
+                if (this.x < 0) this.x = canvas.width;
+                if (this.y > canvas.height) this.y = 0;
+                if (this.y < 0) this.y = canvas.height;
+            }
+
+            draw() {
+                ctx.fillStyle = `rgba(0, 212, 255, ${this.opacity})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            const particleCount = window.innerWidth < 768 ? 50 : 100;
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(particle => {
+                particle.update();
+                particle.draw();
+            });
+            requestAnimationFrame(animateParticles);
+        }
+
+        // Initialize
+        window.addEventListener('resize', () => {
+            resizeCanvas();
+            initParticles();
+        });
+
+        resizeCanvas();
+        initParticles();
+        animateParticles();
+
+        // Remove loader
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('fade-out');
+            }, 1500);
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
         const mobileMenu = document.getElementById('mobileMenu');
         const navLinks = document.getElementById('navLinks');
 
         mobileMenu.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
             navLinks.classList.toggle('active');
         });
 
-        // Close mobile menu when clicking on a link
+        // Close mobile menu when clicking links
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
                 navLinks.classList.remove('active');
             });
         });
 
-        // Smooth scrolling for anchor links
+        // Before/After Slider
+        const slider = document.getElementById('comparisonSlider');
+        const sliderHandle = document.getElementById('sliderHandle');
+        const sliderOverlay = document.getElementById('sliderOverlay');
+        let isSliding = false;
+
+        function updateSliderPosition(x) {
+            const rect = slider.getBoundingClientRect();
+            let position = x - rect.left;
+            position = Math.max(0, Math.min(position, rect.width));
+            const percentage = (position / rect.width) * 100;
+            
+            sliderOverlay.style.width = percentage + '%';
+            sliderHandle.style.left = percentage + '%';
+        }
+
+        sliderHandle.addEventListener('mousedown', () => isSliding = true);
+        document.addEventListener('mouseup', () => isSliding = false);
+        document.addEventListener('mousemove', (e) => {
+            if (isSliding) {
+                updateSliderPosition(e.clientX);
+            }
+        });
+
+        // Touch support for mobile
+        sliderHandle.addEventListener('touchstart', () => isSliding = true);
+        document.addEventListener('touchend', () => isSliding = false);
+        document.addEventListener('touchmove', (e) => {
+            if (isSliding) {
+                updateSliderPosition(e.touches[0].clientX);
+            }
+        });
+
+        // Click to position slider
+        slider.addEventListener('click', (e) => {
+            updateSliderPosition(e.clientX);
+        });
+
+        // Animated Counter
+        const counters = document.querySelectorAll('.stat-number');
+        const observerOptions = {
+            threshold: 0.5
+        };
+
+        const countObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counter = entry.target;
+                    const target = parseInt(counter.getAttribute('data-count'));
+                    let count = 0;
+                    const increment = target / 100;
+                    
+                    const timer = setInterval(() => {
+                        count += increment;
+                        if (count >= target) {
+                            counter.textContent = target + (counter.nextElementSibling.textContent.includes('%') ? '%' : '+');
+                            clearInterval(timer);
+                        } else {
+                            counter.textContent = Math.floor(count);
+                        }
+                    }, 20);
+                    
+                    countObserver.unobserve(counter);
+                }
+            });
+        }, observerOptions);
+
+        counters.forEach(counter => {
+            countObserver.observe(counter);
+        });
+
+        // Form submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Create ripple effect
+            const submitBtn = this.querySelector('.submit-btn');
+            submitBtn.style.transform = 'scale(0.95)';
+            
+            setTimeout(() => {
+                submitBtn.style.transform = 'scale(1)';
+                alert('Thank you for your inquiry! We\'ll contact you within 1 hour.');
+                this.reset();
+            }, 200);
+        });
+
+        // Smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -543,26 +1262,27 @@
             });
         });
 
-        // Form submission handler
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // In a real implementation, you would send this data to a server
-            // For now, we'll just show an alert
-            alert('Thank you for your message! We will contact you soon.');
-            
-            // Reset the form
-            this.reset();
+        // Tint card interactions
+        document.querySelectorAll('.tint-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const tintLevel = this.getAttribute('data-tint');
+                // In a real implementation, this would update the showcase
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 200);
+            });
         });
 
-        // Add scroll effect to navigation
+        // Parallax effect on scroll
         window.addEventListener('scroll', () => {
-            const nav = document.querySelector('nav');
-            if (window.scrollY > 100) {
-                nav.style.background = 'rgba(26, 26, 26, 0.95)';
-            } else {
-                nav.style.background = 'var(--primary-color)';
-            }
+            const scrolled = window.pageYOffset;
+            const parallaxElements = document.querySelectorAll('.hero-content');
+            
+            parallaxElements.forEach(element => {
+                const speed = 0.5;
+                element.style.transform = `translateY(${scrolled * speed}px)`;
+            });
         });
     </script>
 </body>
