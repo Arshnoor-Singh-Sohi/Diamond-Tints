@@ -16,12 +16,12 @@
         :root {
             --primary: #0a0a0a;
             --accent: #00d4ff;
-            --accent-glow: #00a8cc;
+            --accent-glow: #0088aa;
             --glass: rgba(255, 255, 255, 0.05);
             --glass-border: rgba(255, 255, 255, 0.1);
             --text: #ffffff;
             --text-dim: rgba(255, 255, 255, 0.8);
-            --shadow: rgba(0, 212, 255, 0.5);
+            --shadow: rgba(0, 212, 255, 0.3);
             --dark-gradient: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
         }
 
@@ -82,7 +82,7 @@
             align-items: center;
             gap: 0.5rem;
             position: relative;
-            text-shadow: 0 0 30px var(--accent-glow);
+            text-shadow: 0 0 20px var(--accent-glow);
             transition: all 0.3s ease;
         }
 
@@ -129,7 +129,7 @@
 
         .nav-links a:hover {
             color: var(--accent);
-            text-shadow: 0 0 20px var(--accent-glow);
+            text-shadow: 0 0 15px var(--accent-glow);
         }
 
         .nav-links a:hover::after {
@@ -194,7 +194,7 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             animation: gradientShift 4s ease infinite;
-            filter: drop-shadow(0 0 30px rgba(0, 212, 255, 0.5));
+            filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.3));
         }
 
         @keyframes gradientShift {
@@ -242,7 +242,7 @@
             transition: all 0.3s ease;
             text-decoration: none;
             display: inline-block;
-            box-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
         }
 
         .cta-primary::before {
@@ -296,7 +296,14 @@
             padding: 6rem 0;
             position: relative;
             z-index: 2;
-            background: linear-gradient(180deg, transparent 0%, rgba(0, 212, 255, 0.05) 50%, transparent 100%);
+            background: linear-gradient(180deg, transparent 0%, rgba(0, 212, 255, 0.03) 50%, transparent 100%);
+            transition: all 0.5s ease;
+        }
+
+        .tint-showcase.scrolled {
+            background: linear-gradient(180deg, rgba(10, 10, 10, 0.8) 0%, rgba(10, 10, 10, 0.9) 50%, rgba(10, 10, 10, 0.8) 100%);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
         }
 
         .showcase-container {
@@ -458,7 +465,7 @@
             font-weight: 900;
             color: var(--accent);
             margin-bottom: 0.5rem;
-            text-shadow: 0 0 20px var(--accent-glow);
+            text-shadow: 0 0 15px var(--accent-glow);
         }
 
         .tint-name {
@@ -813,30 +820,84 @@
             pointer-events: none;
         }
 
-        .loader-diamond {
-            width: 60px;
-            height: 60px;
-            border: 3px solid var(--accent);
-            transform: rotate(45deg);
-            animation: diamondPulse 1.5s ease infinite;
+        .loader-container {
+            position: relative;
+            width: 120px;
+            height: 120px;
         }
 
-        @keyframes diamondPulse {
+        .loader-diamond {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            border: 2px solid var(--accent);
+            transform: rotate(45deg);
+            animation: diamondFloat 2s ease-in-out infinite;
+        }
+
+        .loader-diamond:nth-child(1) {
+            top: 30px;
+            left: 30px;
+            animation-delay: 0s;
+        }
+
+        .loader-diamond:nth-child(2) {
+            top: 20px;
+            left: 20px;
+            width: 80px;
+            height: 80px;
+            border-color: rgba(0, 212, 255, 0.5);
+            animation-delay: 0.2s;
+        }
+
+        .loader-diamond:nth-child(3) {
+            top: 10px;
+            left: 10px;
+            width: 100px;
+            height: 100px;
+            border-color: rgba(0, 212, 255, 0.3);
+            animation-delay: 0.4s;
+        }
+
+        .loader-text {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-top: 20px;
+            font-family: 'Orbitron', monospace;
+            font-size: 0.9rem;
+            color: var(--accent);
+            letter-spacing: 3px;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes diamondFloat {
             0%, 100% {
                 transform: rotate(45deg) scale(1);
-                box-shadow: 0 0 20px var(--accent-glow);
+                filter: drop-shadow(0 0 15px var(--accent-glow));
             }
             50% {
-                transform: rotate(45deg) scale(1.2);
-                box-shadow: 0 0 40px var(--accent-glow);
+                transform: rotate(45deg) scale(1.1);
+                filter: drop-shadow(0 0 25px var(--accent-glow));
             }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
         }
     </style>
 </head>
 <body>
     <!-- Loading Screen -->
     <div class="loader" id="loader">
-        <div class="loader-diamond"></div>
+        <div class="loader-container">
+            <div class="loader-diamond"></div>
+            <div class="loader-diamond"></div>
+            <div class="loader-diamond"></div>
+            <div class="loader-text">LOADING</div>
+        </div>
     </div>
 
     <!-- Particle Background -->
@@ -1138,10 +1199,29 @@
         // Navbar scroll effect
         window.addEventListener('scroll', () => {
             const navbar = document.getElementById('navbar');
-            if (window.scrollY > 100) {
+            const showcase = document.querySelector('.tint-showcase');
+            const scrollPosition = window.scrollY;
+            
+            // Add scrolled class to navbar after 100px of scrolling
+            if (scrollPosition > 100) {
                 navbar.classList.add('scrolled');
             } else {
                 navbar.classList.remove('scrolled');
+            }
+            
+            // Add blur effect to showcase section when it starts to overlap with content
+            if (showcase) {
+                const showcaseTop = showcase.offsetTop;
+                const showcaseHeight = showcase.offsetHeight;
+                const viewportHeight = window.innerHeight;
+                
+                // Calculate when the showcase section is in the middle of viewport
+                if (scrollPosition > showcaseTop - viewportHeight / 2 && 
+                    scrollPosition < showcaseTop + showcaseHeight) {
+                    showcase.classList.add('scrolled');
+                } else {
+                    showcase.classList.remove('scrolled');
+                }
             }
         });
 
