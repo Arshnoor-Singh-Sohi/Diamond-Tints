@@ -1,4 +1,4 @@
-# Diamond Tints - Premium Window Tinting Website
+# Diamond Tints - Premium Window Tinting Website 
 
 A cutting-edge, interactive website showcasing automotive window tinting services through advanced web technologies and stunning visual effects.
 
