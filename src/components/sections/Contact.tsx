@@ -234,7 +234,7 @@ export default function Contact() {
               {/* Status Messages */}
               {submitStatus === 'success' && (
                 <div className="p-4 bg-green-50 text-green-800 rounded-lg">
-                  Thank you! We'll contact you within 1 hour.
+                  Thank you! We&apos;ll contact you within 1 hour.
                 </div>
               )}
               {submitStatus === 'error' && (
