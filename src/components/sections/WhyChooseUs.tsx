@@ -31,7 +31,7 @@ const reasons = [
   {
     icon: <FaThumbsUp />,
     title: '100% Satisfaction',
-    description: 'Not happy? We\'ll make it right. Your satisfaction is our guarantee.',
+    description: 'Not happy? We&apos;ll make it right. Your satisfaction is our guarantee.',
   },
 ]
 
