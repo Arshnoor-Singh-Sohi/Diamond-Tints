@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Image from 'next/image';
 
 const galleryItems = [
   {
@@ -69,17 +70,22 @@ export default function Gallery() {
               <div className="relative overflow-hidden rounded-xl shadow-lg">
                 {/* Slider Container */}
                 <div className="relative h-64">
-                  <img
+                  <Image
                     src={item.after}
                     alt={`${item.title} - After`}
+                    width={600}  // Set the desired width in pixels
+                    height={400} // Set the desired height in pixels
                     className="absolute inset-0 w-full h-full object-cover"
                   />
                   <div className="absolute inset-0 w-1/2 overflow-hidden">
-                    <img
+                    <Image
                       src={item.before}
                       alt={`${item.title} - Before`}
+                      width={600}  // Match width and height or adjust as needed
+                      height={400}
                       className="absolute inset-0 w-[200%] h-full object-cover"
                     />
+
                   </div>
                   {/* Slider Handle */}
                   <div className="absolute left-1/2 top-0 bottom-0 w-1 bg-white">

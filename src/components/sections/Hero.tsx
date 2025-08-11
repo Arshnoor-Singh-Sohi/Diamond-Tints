@@ -48,11 +48,14 @@ export default function Hero() {
           {/* Hero Image */}
           <div className="relative h-[300px] md:h-[500px]">
             <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-blue-600 rounded-2xl opacity-10"></div>
-            <img
+            <Image
               src="/api/placeholder/600/500"
               alt="Professional window tinting"
+              width={600}
+              height={500}
               className="w-full h-full object-cover rounded-2xl shadow-2xl"
             />
+
           </div>
         </div>
       </div>
