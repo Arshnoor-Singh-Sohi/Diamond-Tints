@@ -3,274 +3,201 @@
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
 
 export default function Hero() {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({
-        x: (e.clientX / window.innerWidth) * 100,
-        y: (e.clientY / window.innerHeight) * 100,
-      })
-    }
-
-    window.addEventListener('mousemove', handleMouseMove)
-    return () => window.removeEventListener('mousemove', handleMouseMove)
-  }, [])
-
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Animated Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
-        {/* Floating Geometric Shapes */}
-        <motion.div
-          className="absolute top-20 left-10 w-32 h-32 bg-blue-200/30 rounded-full blur-xl"
-          animate={{
-            x: mousePosition.x * 0.02,
-            y: mousePosition.y * 0.02,
-          }}
-          transition={{ type: "spring", stiffness: 150, damping: 15 }}
-        />
-        <motion.div
-          className="absolute top-40 right-20 w-48 h-48 bg-indigo-200/20 rounded-full blur-2xl"
-          animate={{
-            x: mousePosition.x * -0.03,
-            y: mousePosition.y * -0.03,
-          }}
-          transition={{ type: "spring", stiffness: 100, damping: 20 }}
-        />
-        <motion.div
-          className="absolute bottom-20 left-1/3 w-24 h-24 bg-blue-300/40 rounded-full blur-lg"
-          animate={{
-            x: mousePosition.x * 0.015,
-            y: mousePosition.y * 0.015,
-          }}
-          transition={{ type: "spring", stiffness: 200, damping: 25 }}
-        />
+    <section className="relative min-h-screen flex items-center bg-gradient-to-b from-slate-50 to-white">
+      {/* Simple background elements - mobile friendly */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-20 right-10 w-32 h-32 bg-blue-100 rounded-full blur-3xl opacity-50"></div>
+        <div className="absolute bottom-40 left-10 w-40 h-40 bg-blue-50 rounded-full blur-2xl opacity-30"></div>
       </div>
 
       <div className="container relative z-10 pt-20 md:pt-24 pb-16 md:pb-24">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Enhanced Content */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="text-center lg:text-left"
-          >
-            {/* Premium Badge */}
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+          
+          {/* Content Section - Mobile optimized */}
+          <div className="text-center lg:text-left order-1 lg:order-1">
+            {/* Trust Badge - Mobile friendly */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.6 }}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-white/80 backdrop-blur-sm 
-                         rounded-full text-sm font-medium text-blue-700 border border-blue-200/50 mb-6"
+              transition={{ duration: 0.6 }}
+              className="inline-flex items-center gap-2 px-3 md:px-4 py-2 bg-white/80 
+                         rounded-full text-xs md:text-sm font-medium text-blue-700 
+                         border border-blue-200 mb-4 md:mb-6"
             >
-              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+              <div className="w-2 h-2 bg-green-500 rounded-full"></div>
               Kingston's #1 Window Tinting Experts
             </motion.div>
 
-            {/* Enhanced Heading */}
+            {/* Main Heading - Responsive typography */}
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.8 }}
-              className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6"
+              transition={{ delay: 0.2, duration: 0.8 }}
+              className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight mb-4 md:mb-6"
             >
               <span className="text-slate-900">Transform Your</span>
               <br />
-              <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 
-                             bg-clip-text text-transparent">
-                Vehicle Today
-              </span>
+              <span className="text-blue-600">Vehicle Today</span>
             </motion.h1>
 
-            {/* Enhanced Description */}
+            {/* Description - Mobile optimized */}
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 0.6 }}
-              className="text-xl md:text-2xl text-slate-600 mb-8 leading-relaxed max-w-2xl"
+              transition={{ delay: 0.4, duration: 0.6 }}
+              className="text-base md:text-lg lg:text-xl text-slate-600 mb-6 md:mb-8 
+                         leading-relaxed max-w-2xl mx-auto lg:mx-0 px-4 lg:px-0"
             >
-              Experience premium window tinting that combines 
-              <span className="font-semibold text-blue-600"> cutting-edge technology</span> with 
-              <span className="font-semibold text-blue-600"> unmatched craftsmanship</span>
+              Experience premium window tinting that combines cutting-edge technology 
+              with unmatched craftsmanship. Professional installation with lifetime warranty.
             </motion.p>
 
-            {/* Enhanced CTA Buttons */}
+            {/* CTA Buttons - Mobile-first design */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.7, duration: 0.6 }}
-              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-12"
+              transition={{ delay: 0.6, duration: 0.6 }}
+              className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center lg:justify-start mb-8 md:mb-12"
             >
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+              {/* Primary CTA */}
+              <Link
+                href="#contact"
+                className="w-full sm:w-auto px-6 md:px-8 py-3 md:py-4 bg-blue-600 text-white 
+                         font-semibold text-base md:text-lg rounded-lg md:rounded-xl 
+                         hover:bg-blue-700 transition-colors duration-300 text-center
+                         shadow-lg hover:shadow-xl"
               >
-                <Link
-                  href="#contact"
-                  className="group relative px-8 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 
-                           text-white font-semibold rounded-2xl shadow-lg hover:shadow-xl 
-                           transition-all duration-300 overflow-hidden"
-                >
-                  <span className="relative z-10">Get Free Estimate</span>
-                  <div className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-purple-600 
-                                opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                </Link>
-              </motion.div>
+                Get Free Estimate
+              </Link>
 
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+              {/* Secondary CTA */}
+              <Link
+                href="tel:6473550079"
+                className="w-full sm:w-auto px-6 md:px-8 py-3 md:py-4 bg-white text-blue-600 
+                         font-semibold text-base md:text-lg rounded-lg md:rounded-xl border-2 border-blue-200 
+                         hover:border-blue-400 hover:bg-blue-50 transition-all duration-300 text-center
+                         shadow-sm hover:shadow-md"
               >
-                <Link
-                  href="tel:6473550079"
-                  className="group px-8 py-4 bg-white/80 backdrop-blur-sm text-blue-600 
-                           font-semibold rounded-2xl border-2 border-blue-200 hover:border-blue-400 
-                           hover:bg-white transition-all duration-300 shadow-lg hover:shadow-xl"
-                >
-                  <span className="flex items-center gap-2">
-                    <svg className="w-5 h-5 group-hover:animate-pulse" fill="currentColor" viewBox="0 0 20 20">
-                      <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
-                    </svg>
-                    Call Now
-                  </span>
-                </Link>
-              </motion.div>
+                <span className="flex items-center justify-center gap-2">
+                  <svg className="w-4 h-4 md:w-5 md:h-5" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
+                  </svg>
+                  Call Now
+                </span>
+              </Link>
             </motion.div>
 
-            {/* Enhanced Trust Indicators */}
+            {/* Trust Indicators - Mobile responsive */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.9, duration: 0.6 }}
-              className="flex flex-wrap gap-8 justify-center lg:justify-start items-center"
+              transition={{ delay: 0.8, duration: 0.6 }}
+              className="flex flex-wrap gap-4 md:gap-8 justify-center lg:justify-start items-center text-sm md:text-base"
             >
+              {/* Rating */}
               <div className="flex items-center gap-2">
                 <div className="flex">
                   {[...Array(5)].map((_, i) => (
-                    <motion.span
-                      key={i}
-                      initial={{ opacity: 0, scale: 0 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ delay: 1 + i * 0.1, duration: 0.3 }}
-                      className="text-yellow-400 text-xl"
-                    >
-                      ★
-                    </motion.span>
+                    <span key={i} className="text-yellow-400 text-base md:text-lg">★</span>
                   ))}
                 </div>
                 <span className="text-slate-600 font-medium">5.0 Rating</span>
               </div>
 
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                className="text-slate-600 font-medium"
-              >
-                <span className="text-2xl font-bold text-blue-600">500+</span> Happy Customers
-              </motion.div>
+              {/* Customers */}
+              <div className="text-slate-600 font-medium">
+                <span className="text-lg md:text-xl font-bold text-blue-600">500+</span> Happy Customers
+              </div>
 
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                className="text-slate-600 font-medium"
-              >
-                <span className="text-2xl font-bold text-blue-600">Lifetime</span> Warranty
-              </motion.div>
+              {/* Warranty */}
+              <div className="text-slate-600 font-medium">
+                <span className="text-lg md:text-xl font-bold text-blue-600">Lifetime</span> Warranty
+              </div>
             </motion.div>
-          </motion.div>
+          </div>
 
-          {/* Enhanced Hero Image with 3D Effect */}
+          {/* Image Section - Mobile optimized */}
           <motion.div
-            initial={{ opacity: 0, x: 50, rotateY: 15 }}
-            animate={{ opacity: 1, x: 0, rotateY: 0 }}
-            transition={{ duration: 1, ease: "easeOut" }}
-            className="relative perspective-1000"
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.4, duration: 0.8 }}
+            className="order-2 lg:order-2"
           >
-            <motion.div
-              animate={{
-                rotateY: mousePosition.x * 0.05 - 2.5,
-                rotateX: -(mousePosition.y * 0.05 - 2.5),
-              }}
-              transition={{ type: "spring", stiffness: 100, damping: 15 }}
-              className="relative h-[400px] md:h-[600px] transform-gpu"
-            >
-              {/* Background Glow */}
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-500 
-                            rounded-3xl blur-2xl opacity-20 scale-110"></div>
-              
+            <div className="relative">
               {/* Main Image Container */}
-              <div className="relative h-full bg-gradient-to-br from-white to-gray-50 
-                            rounded-3xl shadow-2xl overflow-hidden border border-white/50">
+              <div className="relative h-64 md:h-80 lg:h-96 xl:h-[500px] bg-gradient-to-br from-white to-gray-50 
+                            rounded-2xl md:rounded-3xl shadow-xl overflow-hidden border border-gray-200">
                 
-                {/* Animated Border */}
-                <div className="absolute inset-0 rounded-3xl">
-                  <div className="absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-500 to-blue-500 
-                                rounded-3xl opacity-60 animate-pulse"></div>
-                  <div className="absolute inset-[2px] bg-white rounded-3xl"></div>
-                </div>
+                {/* Hero Image */}
+                <Image
+                  src="/images/hero.jpg"
+                  alt="Professional window tinting transformation"
+                  width={600}
+                  height={500}
+                  className="w-full h-full object-cover"
+                  priority
+                />
 
-                {/* Image */}
-                <div className="relative z-10 h-full p-4">
-                  <Image
-                    src="/api/placeholder/600/500"
-                    alt="Professional window tinting transformation"
-                    width={600}
-                    height={500}
-                    className="w-full h-full object-cover rounded-2xl shadow-xl"
-                    priority
-                  />
-                  
-                  {/* Floating Elements */}
+                {/* Simple overlay badges - Mobile friendly */}
+                <div className="absolute inset-0 p-3 md:p-6">
+                  {/* UV Protection Badge */}
                   <motion.div
-                    animate={{ y: [-10, 10, -10] }}
-                    transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                    className="absolute top-8 right-8 bg-white/90 backdrop-blur-sm 
-                             px-4 py-3 rounded-xl shadow-lg border border-white/50"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 1, duration: 0.5 }}
+                    className="absolute top-3 md:top-6 right-3 md:right-6 bg-white/90 backdrop-blur-sm 
+                             px-3 md:px-4 py-2 md:py-3 rounded-lg md:rounded-xl shadow-lg border border-white/50"
                   >
                     <div className="text-center">
-                      <div className="text-2xl font-bold text-blue-600">99%</div>
-                      <div className="text-sm text-slate-600">UV Block</div>
+                      <div className="text-lg md:text-2xl font-bold text-blue-600">99%</div>
+                      <div className="text-xs md:text-sm text-slate-600">UV Block</div>
                     </div>
                   </motion.div>
 
+                  {/* Installation Time Badge */}
                   <motion.div
-                    animate={{ y: [10, -10, 10] }}
-                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-                    className="absolute bottom-8 left-8 bg-white/90 backdrop-blur-sm 
-                             px-4 py-3 rounded-xl shadow-lg border border-white/50"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 1.2, duration: 0.5 }}
+                    className="absolute bottom-3 md:bottom-6 left-3 md:left-6 bg-white/90 backdrop-blur-sm 
+                             px-3 md:px-4 py-2 md:py-3 rounded-lg md:rounded-xl shadow-lg border border-white/50"
                   >
                     <div className="text-center">
-                      <div className="text-2xl font-bold text-green-600">2-3h</div>
-                      <div className="text-sm text-slate-600">Installation</div>
+                      <div className="text-lg md:text-2xl font-bold text-green-600">2-3h</div>
+                      <div className="text-xs md:text-sm text-slate-600">Install Time</div>
                     </div>
                   </motion.div>
                 </div>
               </div>
-            </motion.div>
+
+              {/* Decorative Elements - Subtle and mobile-safe */}
+              <div className="absolute -top-4 -left-4 w-8 h-8 md:w-12 md:h-12 bg-blue-200 rounded-full opacity-60"></div>
+              <div className="absolute -bottom-4 -right-4 w-6 h-6 md:w-10 md:h-10 bg-blue-300 rounded-full opacity-40"></div>
+            </div>
           </motion.div>
         </div>
       </div>
 
-      {/* Scroll Indicator */}
+      {/* Simple scroll indicator - Hidden on mobile for clean look */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5, duration: 0.6 }}
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+        className="absolute bottom-6 md:bottom-8 left-1/2 transform -translate-x-1/2 hidden md:block"
       >
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-          className="flex flex-col items-center gap-2 text-slate-400"
-        >
+        <div className="flex flex-col items-center gap-2 text-slate-400">
           <span className="text-sm font-medium">Scroll to explore</span>
           <div className="w-6 h-10 border-2 border-slate-300 rounded-full flex justify-center">
-            <div className="w-1 h-3 bg-slate-400 rounded-full mt-2 animate-pulse"></div>
+            <motion.div
+              animate={{ y: [0, 12, 0] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+              className="w-1 h-3 bg-slate-400 rounded-full mt-2"
+            />
           </div>
-        </motion.div>
+        </div>
       </motion.div>
     </section>
   )

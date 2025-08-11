@@ -1,9 +1,9 @@
-
 'use client'
 
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { FaPhone, FaEnvelope, FaClock, FaMapMarkerAlt } from 'react-icons/fa'
+import { motion } from 'framer-motion'
+import { FaPhone, FaEnvelope, FaClock, FaMapMarkerAlt, FaInstagram } from 'react-icons/fa'
 
 type FormData = {
   name: string
@@ -52,201 +52,248 @@ export default function Contact() {
   return (
     <section id="contact" className="section-padding bg-gray-50">
       <div className="container">
-        <div className="grid lg:grid-cols-2 gap-12">
-          {/* Contact Information */}
-          <div>
-            <h2 className="heading-2 text-gray-900 mb-6">Get In Touch</h2>
-            <p className="text-lg text-gray-600 mb-8">
-              Ready to transform your vehicle? Get a free quote today!
-            </p>
+        {/* Section Header - Mobile optimized */}
+        <div className="text-center mb-8 md:mb-12">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 md:mb-4">
+            Get In Touch
+          </h2>
+          <p className="text-base md:text-lg text-gray-600 px-4">
+            Ready to transform your vehicle? Get a free quote today!
+          </p>
+        </div>
 
-            <div className="space-y-6">
-              <div className="flex items-start gap-4">
-                <FaPhone className="text-blue-600 text-xl mt-1" />
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
+          {/* Contact Information - Mobile optimized */}
+          <div className="order-2 lg:order-1">
+            <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-6 md:mb-8">
+              Contact Information
+            </h3>
+
+            <div className="space-y-4 md:space-y-6 mb-8">
+              {/* Phone */}
+              <div className="flex items-start gap-3 md:gap-4">
+                <div className="flex-shrink-0 w-10 h-10 md:w-12 md:h-12 bg-blue-100 rounded-lg 
+                              flex items-center justify-center">
+                  <FaPhone className="text-blue-600 text-sm md:text-base" />
+                </div>
                 <div>
-                  <h3 className="font-semibold text-gray-900 mb-1">Phone</h3>
-                  <a href="tel:6473550079" className="text-gray-600 hover:text-blue-600">
+                  <h4 className="font-semibold text-gray-900 mb-1 text-sm md:text-base">Phone</h4>
+                  <a href="tel:6473550079" 
+                     className="text-blue-600 hover:text-blue-700 font-medium text-sm md:text-base">
                     (647) 355-0079
                   </a>
+                  <p className="text-xs md:text-sm text-gray-500">Sukhnoor Singh Sohi</p>
                 </div>
               </div>
 
-              <div className="flex items-start gap-4">
-                <FaEnvelope className="text-blue-600 text-xl mt-1" />
+              {/* Email */}
+              <div className="flex items-start gap-3 md:gap-4">
+                <div className="flex-shrink-0 w-10 h-10 md:w-12 md:h-12 bg-blue-100 rounded-lg 
+                              flex items-center justify-center">
+                  <FaEnvelope className="text-blue-600 text-sm md:text-base" />
+                </div>
                 <div>
-                  <h3 className="font-semibold text-gray-900 mb-1">Email</h3>
-                  <a href="mailto:info@diamondtints.ca" className="text-gray-600 hover:text-blue-600">
+                  <h4 className="font-semibold text-gray-900 mb-1 text-sm md:text-base">Email</h4>
+                  <a href="mailto:info@diamondtints.ca" 
+                     className="text-blue-600 hover:text-blue-700 font-medium text-sm md:text-base break-all">
                     info@diamondtints.ca
                   </a>
                 </div>
               </div>
 
-              <div className="flex items-start gap-4">
-                <FaMapMarkerAlt className="text-blue-600 text-xl mt-1" />
+              {/* Location */}
+              <div className="flex items-start gap-3 md:gap-4">
+                <div className="flex-shrink-0 w-10 h-10 md:w-12 md:h-12 bg-blue-100 rounded-lg 
+                              flex items-center justify-center">
+                  <FaMapMarkerAlt className="text-blue-600 text-sm md:text-base" />
+                </div>
                 <div>
-                  <h3 className="font-semibold text-gray-900 mb-1">Location</h3>
-                  <p className="text-gray-600">Kingston, Ontario</p>
+                  <h4 className="font-semibold text-gray-900 mb-1 text-sm md:text-base">Location</h4>
+                  <p className="text-gray-600 text-sm md:text-base">Kingston, Ontario</p>
                 </div>
               </div>
 
-              <div className="flex items-start gap-4">
-                <FaClock className="text-blue-600 text-xl mt-1" />
+              {/* Business Hours */}
+              <div className="flex items-start gap-3 md:gap-4">
+                <div className="flex-shrink-0 w-10 h-10 md:w-12 md:h-12 bg-blue-100 rounded-lg 
+                              flex items-center justify-center">
+                  <FaClock className="text-blue-600 text-sm md:text-base" />
+                </div>
                 <div>
-                  <h3 className="font-semibold text-gray-900 mb-1">Business Hours</h3>
-                  <p className="text-gray-600">Mon-Fri: 8:00 AM - 6:00 PM</p>
-                  <p className="text-gray-600">Sat: 9:00 AM - 4:00 PM</p>
-                  <p className="text-gray-600">Sun: Closed</p>
+                  <h4 className="font-semibold text-gray-900 mb-1 text-sm md:text-base">Business Hours</h4>
+                  <div className="text-gray-600 text-xs md:text-sm space-y-1">
+                    <p>Mon-Fri: 8:00 AM - 6:00 PM</p>
+                    <p>Sat: 9:00 AM - 4:00 PM</p>
+                    <p>Sun: Closed</p>
+                  </div>
                 </div>
               </div>
             </div>
 
-            {/* Instagram Link */}
-            <div className="mt-8 p-6 bg-white rounded-xl border border-gray-200">
-              <h3 className="font-semibold text-gray-900 mb-3">Follow Our Work</h3>
+            {/* Instagram Link - Mobile optimized */}
+            <div className="bg-white p-4 md:p-6 rounded-xl border border-gray-200">
+              <h4 className="font-semibold text-gray-900 mb-3 text-sm md:text-base">Follow Our Work</h4>
               <a 
                 href="https://www.instagram.com/diamonddetailsandtints" 
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700"
+                className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 
+                         font-medium text-sm md:text-base"
               >
-                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1112.324 0 6.162 6.162 0 01-12.324 0zM12 16a4 4 0 110-8 4 4 0 010 8zm4.965-10.405a1.44 1.44 0 112.881.001 1.44 1.44 0 01-2.881-.001z"/>
-                </svg>
-                @diamonddetailsandtints
+                <FaInstagram className="text-lg md:text-xl" />
+                <span className="break-all">@diamonddetailsandtints</span>
               </a>
             </div>
           </div>
 
-          {/* Contact Form */}
-          <div className="bg-white p-8 rounded-2xl shadow-lg">
-            <h3 className="heading-3 text-2xl mb-6">Request Free Quote</h3>
-            
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Full Name *
-                </label>
-                <input
-                  {...register('name', { required: 'Name is required' })}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 
-                           focus:ring-blue-500 focus:border-transparent transition-all"
-                  placeholder="John Doe"
-                />
-                {errors.name && (
-                  <p className="mt-1 text-sm text-red-600">{errors.name.message}</p>
-                )}
-              </div>
+          {/* Contact Form - Mobile optimized */}
+          <div className="order-1 lg:order-2">
+            <div className="bg-white p-6 md:p-8 rounded-xl md:rounded-2xl shadow-sm border border-gray-100">
+              <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-6">
+                Request Free Quote
+              </h3>
+              
+              <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 md:space-y-6">
+                {/* Name */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Full Name *
+                  </label>
+                  <input
+                    {...register('name', { required: 'Name is required' })}
+                    className="w-full px-3 md:px-4 py-2 md:py-3 border border-gray-300 rounded-lg 
+                             text-sm md:text-base focus:ring-2 focus:ring-blue-500 focus:border-transparent 
+                             transition-all"
+                    placeholder="John Doe"
+                  />
+                  {errors.name && (
+                    <p className="mt-1 text-sm text-red-600">{errors.name.message}</p>
+                  )}
+                </div>
 
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Email *
-                </label>
-                <input
-                  {...register('email', { 
-                    required: 'Email is required',
-                    pattern: {
-                      value: /^\S+@\S+$/i,
-                      message: 'Invalid email address'
-                    }
-                  })}
-                  type="email"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 
-                           focus:ring-blue-500 focus:border-transparent transition-all"
-                  placeholder="john@example.com"
-                />
-                {errors.email && (
-                  <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>
-                )}
-              </div>
+                {/* Email */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Email *
+                  </label>
+                  <input
+                    {...register('email', { 
+                      required: 'Email is required',
+                      pattern: {
+                        value: /^\S+@\S+$/i,
+                        message: 'Invalid email address'
+                      }
+                    })}
+                    type="email"
+                    className="w-full px-3 md:px-4 py-2 md:py-3 border border-gray-300 rounded-lg 
+                             text-sm md:text-base focus:ring-2 focus:ring-blue-500 focus:border-transparent 
+                             transition-all"
+                    placeholder="john@example.com"
+                  />
+                  {errors.email && (
+                    <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>
+                  )}
+                </div>
 
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Phone *
-                </label>
-                <input
-                  {...register('phone', { required: 'Phone is required' })}
-                  type="tel"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 
-                           focus:ring-blue-500 focus:border-transparent transition-all"
-                  placeholder="(555) 123-4567"
-                />
-                {errors.phone && (
-                  <p className="mt-1 text-sm text-red-600">{errors.phone.message}</p>
-                )}
-              </div>
+                {/* Phone */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Phone *
+                  </label>
+                  <input
+                    {...register('phone', { required: 'Phone is required' })}
+                    type="tel"
+                    className="w-full px-3 md:px-4 py-2 md:py-3 border border-gray-300 rounded-lg 
+                             text-sm md:text-base focus:ring-2 focus:ring-blue-500 focus:border-transparent 
+                             transition-all"
+                    placeholder="(555) 123-4567"
+                  />
+                  {errors.phone && (
+                    <p className="mt-1 text-sm text-red-600">{errors.phone.message}</p>
+                  )}
+                </div>
 
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Vehicle (Year, Make, Model)
-                </label>
-                <input
-                  {...register('vehicle')}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 
-                           focus:ring-blue-500 focus:border-transparent transition-all"
-                  placeholder="2024 Honda Civic"
-                />
-              </div>
+                {/* Vehicle */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Vehicle (Year, Make, Model)
+                  </label>
+                  <input
+                    {...register('vehicle')}
+                    className="w-full px-3 md:px-4 py-2 md:py-3 border border-gray-300 rounded-lg 
+                             text-sm md:text-base focus:ring-2 focus:ring-blue-500 focus:border-transparent 
+                             transition-all"
+                    placeholder="2024 Honda Civic"
+                  />
+                </div>
 
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Service Interest *
-                </label>
-                <select
-                  {...register('service', { required: 'Please select a service' })}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 
-                           focus:ring-blue-500 focus:border-transparent transition-all"
+                {/* Service */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Service Interest *
+                  </label>
+                  <select
+                    {...register('service', { required: 'Please select a service' })}
+                    className="w-full px-3 md:px-4 py-2 md:py-3 border border-gray-300 rounded-lg 
+                             text-sm md:text-base focus:ring-2 focus:ring-blue-500 focus:border-transparent 
+                             transition-all"
+                  >
+                    <option value="">Select a service</option>
+                    <option value="full-tint">Full Vehicle Tint</option>
+                    <option value="front-windows">Front Windows Only</option>
+                    <option value="rear-windows">Rear Windows Only</option>
+                    <option value="windshield">Windshield Strip</option>
+                    <option value="removal">Tint Removal</option>
+                    <option value="other">Other</option>
+                  </select>
+                  {errors.service && (
+                    <p className="mt-1 text-sm text-red-600">{errors.service.message}</p>
+                  )}
+                </div>
+
+                {/* Message */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Additional Information
+                  </label>
+                  <textarea
+                    {...register('message')}
+                    rows={4}
+                    className="w-full px-3 md:px-4 py-2 md:py-3 border border-gray-300 rounded-lg 
+                             text-sm md:text-base focus:ring-2 focus:ring-blue-500 focus:border-transparent 
+                             transition-all resize-none"
+                    placeholder="Tell us more about your project..."
+                  />
+                </div>
+
+                {/* Submit Button */}
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full px-6 py-3 md:py-4 bg-blue-600 text-white font-semibold 
+                           text-base md:text-lg rounded-lg hover:bg-blue-700 
+                           disabled:opacity-50 disabled:cursor-not-allowed 
+                           transition-colors duration-300"
                 >
-                  <option value="">Select a service</option>
-                  <option value="full-tint">Full Vehicle Tint</option>
-                  <option value="front-windows">Front Windows Only</option>
-                  <option value="rear-windows">Rear Windows Only</option>
-                  <option value="windshield">Windshield Strip</option>
-                  <option value="removal">Tint Removal</option>
-                  <option value="other">Other</option>
-                </select>
-                {errors.service && (
-                  <p className="mt-1 text-sm text-red-600">{errors.service.message}</p>
+                  {isSubmitting ? 'Sending...' : 'Get Free Quote'}
+                </button>
+
+                {/* Status Messages */}
+                {submitStatus === 'success' && (
+                  <div className="p-4 bg-green-50 text-green-800 rounded-lg text-sm md:text-base">
+                    Thank you! We&apos;ll contact you within 1 hour.
+                  </div>
                 )}
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Additional Information
-                </label>
-                <textarea
-                  {...register('message')}
-                  rows={4}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 
-                           focus:ring-blue-500 focus:border-transparent transition-all resize-none"
-                  placeholder="Tell us more about your project..."
-                />
-              </div>
-
-              {/* Submit Button */}
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {isSubmitting ? 'Sending...' : 'Get Free Quote'}
-              </button>
-
-              {/* Status Messages */}
-              {submitStatus === 'success' && (
-                <div className="p-4 bg-green-50 text-green-800 rounded-lg">
-                  Thank you! We&apos;ll contact you within 1 hour.
-                </div>
-              )}
-              {submitStatus === 'error' && (
-                <div className="p-4 bg-red-50 text-red-800 rounded-lg">
-                  Something went wrong. Please call us at (647) 355-0079.
-                </div>
-              )}
-            </form>
+                {submitStatus === 'error' && (
+                  <div className="p-4 bg-red-50 text-red-800 rounded-lg text-sm md:text-base">
+                    Something went wrong. Please call us at (647) 355-0079.
+                  </div>
+                )}
+              </form>
+            </div>
           </div>
         </div>
       </div>
     </section>
   )
 }
-

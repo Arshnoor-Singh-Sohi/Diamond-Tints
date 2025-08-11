@@ -277,36 +277,21 @@ export default function Services() {
           transition={{ delay: 0.6, duration: 0.8 }}
           className="text-center mt-16"
         >
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="inline-block"
+        <motion.div
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+          className="inline-block"
+        >
+          <Link
+            href="#contact"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-blue-600 text-white 
+                    font-semibold text-lg rounded-xl hover:bg-blue-700 
+                    transition-colors duration-300 shadow-lg hover:shadow-xl"
           >
-            <Link
-              href="#contact"
-              className="group relative px-10 py-5 bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 
-                         text-white font-bold text-lg rounded-2xl shadow-xl hover:shadow-2xl 
-                         transition-all duration-500 overflow-hidden"
-            >
-              <span className="relative z-10 flex items-center gap-3">
-                Get Your Free Professional Quote
-                <motion.div
-                  animate={{ x: [0, 5, 0] }}
-                  transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-                >
-                  <FaArrowRight />
-                </motion.div>
-              </span>
-              
-              {/* Animated Background */}
-              <motion.div
-                animate={{ x: ['0%', '100%'] }}
-                transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent 
-                           skew-x-12 translate-x-[-100%]"
-              />
-            </Link>
-          </motion.div>
+            Get Your Free Professional Quote
+            <span className="text-xl">→</span>
+          </Link>
+        </motion.div>
 
           <motion.p
             initial={{ opacity: 0 }}
