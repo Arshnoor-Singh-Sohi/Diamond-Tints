@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import Image from 'next/image' // <-- Import Image component
+import Image from 'next/image' // Import Next.js Image component
 import { HiMenu, HiX } from 'react-icons/hi'
 import MobileMenu from './MobileMenu'
 
@@ -30,7 +30,7 @@ export default function Header() {
     <>
       <header
         className={`fixed top-0 w-full z-40 transition-all duration-300 ${
-          isScrolled ? 'bg-white shadow-lg' : 'bg-white/95 backdrop-blur-sm'
+          isScrolled ? 'bg-[#fefefe] shadow-lg' : 'bg-[#fefefe]/95 backdrop-blur-sm'
         }`}
       >
         <div className="container">
@@ -38,11 +38,11 @@ export default function Header() {
             {/* Logo */}
             <Link href="/" className="flex items-center space-x-3">
               <Image
-                src="/logo.png" // Path relative to /public
+                src="/logo.png" // Replace with your PNG logo file name in /public folder
                 alt="Diamond Tints Logo"
-                width={40} // Adjust size
+                width={40} // Adjust as needed
                 height={40}
-                priority // Preload for better LCP
+                priority
               />
               <span className="text-2xl md:text-3xl font-bold text-blue-600">
                 Diamond Tints
