@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import Image from 'next/image' // <-- Import Image component
 import { HiMenu, HiX } from 'react-icons/hi'
 import MobileMenu from './MobileMenu'
 
@@ -27,13 +28,22 @@ export default function Header() {
 
   return (
     <>
-      <header className={`fixed top-0 w-full z-40 transition-all duration-300 ${
-        isScrolled ? 'bg-white shadow-lg' : 'bg-white/95 backdrop-blur-sm'
-      }`}>
+      <header
+        className={`fixed top-0 w-full z-40 transition-all duration-300 ${
+          isScrolled ? 'bg-white shadow-lg' : 'bg-white/95 backdrop-blur-sm'
+        }`}
+      >
         <div className="container">
           <div className="flex items-center justify-between h-16 md:h-20">
             {/* Logo */}
-            <Link href="/" className="flex items-center space-x-2">
+            <Link href="/" className="flex items-center space-x-3">
+              <Image
+                src="/logo.png" // Path relative to /public
+                alt="Diamond Tints Logo"
+                width={40} // Adjust size
+                height={40}
+                priority // Preload for better LCP
+              />
               <span className="text-2xl md:text-3xl font-bold text-blue-600">
                 Diamond Tints
               </span>
@@ -68,8 +78,8 @@ export default function Header() {
       </header>
 
       {/* Mobile Menu */}
-      <MobileMenu 
-        isOpen={isMobileMenuOpen} 
+      <MobileMenu
+        isOpen={isMobileMenuOpen}
         onClose={() => setIsMobileMenuOpen(false)}
         navItems={navItems}
       />
