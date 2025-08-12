@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { motion } from 'framer-motion'
-import { FaPhone, FaEnvelope, FaClock, FaMapMarkerAlt, FaInstagram } from 'react-icons/fa'
+import { FaPhone, FaEnvelope, FaClock, FaMapMarkerAlt, FaInstagram, FaWhatsapp } from 'react-icons/fa'
 
 type FormData = {
   name: string
@@ -25,24 +25,71 @@ export default function Contact() {
     formState: { errors }
   } = useForm<FormData>()
 
+  // Format the form data into a readable WhatsApp message
+  const formatWhatsAppMessage = (data: FormData): string => {
+    let message = "*New Service Request - Diamond Tints*\n"
+    message += "=============================\n\n"
+    
+    message += `*Full Name:* ${data.name}\n`
+    message += `*Email:* ${data.email}\n`
+    message += `*Phone:* ${data.phone}\n`
+    
+    if (data.vehicle.trim()) {
+      message += `*Vehicle:* ${data.vehicle}\n`
+    }
+    
+    message += `*Service Requested:* ${data.service}\n`
+    
+    if (data.message.trim()) {
+      message += `*Additional Details:*\n${data.message}\n`
+    }
+    
+    message += `\n*Date Submitted:* ${new Date().toLocaleDateString('en-US', {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    })} at ${new Date().toLocaleTimeString('en-US', {
+      hour: 'numeric',
+      minute: '2-digit',
+      hour12: true
+    })}\n`
+    
+    message += "\n✅ Please reply with availability for quote/consultation"
+    
+    return message
+  }
+
   const onSubmit = async (data: FormData) => {
     setIsSubmitting(true)
     setSubmitStatus('idle')
 
     try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      })
-
-      if (response.ok) {
+      // Format the message for WhatsApp
+      const whatsappMessage = formatWhatsAppMessage(data)
+      
+      // WhatsApp number (from your constants)
+      const whatsappNumber = '16473550079'
+      
+      // Create WhatsApp URL with formatted message
+      const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`
+      
+      // Small delay to show loading state
+      await new Promise(resolve => setTimeout(resolve, 500))
+      
+      // Open WhatsApp in a new window/tab for better UX
+      const whatsappWindow = window.open(whatsappUrl, '_blank', 'noopener,noreferrer')
+      
+      if (whatsappWindow) {
         setSubmitStatus('success')
-        reset()
+        reset() // Clear the form
       } else {
-        setSubmitStatus('error')
+        // Fallback if popup was blocked
+        window.location.href = whatsappUrl
       }
+      
     } catch (error) {
+      console.error('Error sending WhatsApp message:', error)
       setSubmitStatus('error')
     } finally {
       setIsSubmitting(false)
@@ -58,7 +105,7 @@ export default function Contact() {
             Get In Touch
           </h2>
           <p className="text-base md:text-lg text-gray-600 px-4">
-            Ready to transform your vehicle? Get a free quote today!
+            Ready to transform your vehicle? Contact us for professional window tinting!
           </p>
         </div>
 
@@ -150,7 +197,7 @@ export default function Contact() {
           <div className="order-1 lg:order-2">
             <div className="bg-white p-6 md:p-8 rounded-xl md:rounded-2xl shadow-sm border border-gray-100">
               <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-6">
-                Request Free Quote
+                Request Service Quote
               </h3>
               
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 md:space-y-6">
@@ -230,7 +277,7 @@ export default function Contact() {
                 {/* Service */}
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Service Interest *
+                    Service Needed *
                   </label>
                   <select
                     {...register('service', { required: 'Please select a service' })}
@@ -239,12 +286,15 @@ export default function Contact() {
                              transition-all"
                   >
                     <option value="">Select a service</option>
-                    <option value="full-tint">Full Vehicle Tint</option>
-                    <option value="front-windows">Front Windows Only</option>
-                    <option value="rear-windows">Rear Windows Only</option>
-                    <option value="windshield">Windshield Strip</option>
-                    <option value="removal">Tint Removal</option>
-                    <option value="other">Other</option>
+                    <option value="Full Vehicle Tint">Full Vehicle Tint</option>
+                    <option value="Front Windows Only">Front Windows Only</option>
+                    <option value="Rear Windows Only">Rear Windows Only</option>
+                    <option value="Windshield Strip">Windshield Strip</option>
+                    <option value="Ceramic Tint Upgrade">Ceramic Tint Upgrade</option>
+                    <option value="Security Film">Security Film</option>
+                    <option value="Tint Removal">Tint Removal</option>
+                    <option value="Consultation">Free Consultation</option>
+                    <option value="Other">Other (Please specify in message)</option>
                   </select>
                   {errors.service && (
                     <p className="mt-1 text-sm text-red-600">{errors.service.message}</p>
@@ -262,7 +312,7 @@ export default function Contact() {
                     className="w-full px-3 md:px-4 py-2 md:py-3 border border-gray-300 rounded-lg 
                              text-sm md:text-base focus:ring-2 focus:ring-blue-500 focus:border-transparent 
                              transition-all resize-none"
-                    placeholder="Tell us more about your project..."
+                    placeholder="Tell us about your tinting preferences, timeline, or any questions you have..."
                   />
                 </div>
 
@@ -273,23 +323,56 @@ export default function Contact() {
                   className="w-full px-6 py-3 md:py-4 bg-blue-600 text-white font-semibold 
                            text-base md:text-lg rounded-lg hover:bg-blue-700 
                            disabled:opacity-50 disabled:cursor-not-allowed 
-                           transition-colors duration-300"
+                           transition-colors duration-300 flex items-center justify-center gap-2"
                 >
-                  {isSubmitting ? 'Sending...' : 'Get Free Quote'}
+                  {isSubmitting ? (
+                    <>
+                      <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+                      <span>Preparing Message...</span>
+                    </>
+                  ) : (
+                    <>
+                      <FaWhatsapp className="text-lg" />
+                      <span>Send via WhatsApp</span>
+                    </>
+                  )}
                 </button>
 
                 {/* Status Messages */}
                 {submitStatus === 'success' && (
-                  <div className="p-4 bg-green-50 text-green-800 rounded-lg text-sm md:text-base">
-                    Thank you! We&apos;ll contact you within 1 hour.
+                  <div className="p-4 bg-green-50 border border-green-200 text-green-800 rounded-lg text-sm md:text-base">
+                    <div className="flex items-center gap-2 mb-2">
+                      <FaWhatsapp className="text-green-600" />
+                      <strong>Message Prepared Successfully!</strong>
+                    </div>
+                    <p>
+                      WhatsApp should have opened with your service request. If it didn&apos;t open automatically, 
+                      please check your popup blocker or call us directly at (647) 355-0079.
+                    </p>
                   </div>
                 )}
                 {submitStatus === 'error' && (
-                  <div className="p-4 bg-red-50 text-red-800 rounded-lg text-sm md:text-base">
-                    Something went wrong. Please call us at (647) 355-0079.
+                  <div className="p-4 bg-red-50 border border-red-200 text-red-800 rounded-lg text-sm md:text-base">
+                    <strong>Unable to open WhatsApp.</strong> Please call us directly at (647) 355-0079 
+                    or try again with a different browser.
                   </div>
                 )}
               </form>
+
+              {/* Info Box */}
+              {/* <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                <div className="flex items-start gap-3">
+                  <FaWhatsapp className="text-blue-600 text-xl mt-0.5 flex-shrink-0" />
+                  <div className="text-sm md:text-base text-blue-800">
+                    <p className="font-semibold mb-1">How it works:</p>
+                    <p>
+                      When you click "Send via WhatsApp", we&apos;ll format your information and open 
+                      WhatsApp with a pre-written message. You can review and send it directly to us 
+                      for the fastest response!
+                    </p>
+                  </div>
+                </div>
+              </div> */}
             </div>
           </div>
         </div>
